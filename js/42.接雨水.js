@@ -1,4 +1,3 @@
-//暴力解决
 var trap1 = function (heights) {
   let max_left = [];
   let max_right = [];

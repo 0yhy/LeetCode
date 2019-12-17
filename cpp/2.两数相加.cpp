@@ -18,35 +18,40 @@ class Solution
 public:
     ListNode *addTwoNumbers(ListNode *l1, ListNode *l2)
     {
-        long long ans = getNumber(l1) + getNumber(l2);
-        ListNode *head = new ListNode(ans % 10);
-        ans /= 10;
-        ListNode *p = head;
-        while (ans)
+        ListNode *p1 = l1;
+        ListNode *p2 = l2;
+        int data = l1->val + l2->val;
+        ListNode *ans = new ListNode(data % 10);
+        ListNode *p = ans;
+        int carry = data / 10;
+        p1 = p1->next;
+        p2 = p2->next;
+        while (p1 || p2)
         {
-            ListNode *q = new ListNode(ans % 10);
-            ans /= 10;
+            int v1 = 0, v2 = 0;
+            if (p1)
+            {
+                v1 = p1->val;
+                p1 = p1->next;
+            }
+            if (p2)
+            {
+                v2 = p2->val;
+                p2 = p2->next;
+            }
+            int data = carry + v1 + v2;
+            carry = data / 10;
+            ListNode *q = new ListNode(data % 10);
             p->next = q;
             p = q;
         }
-        return head;
-    }
-    long long getNumber(ListNode *l)
-    {
-        vector<int> v;
-        long long ans = 0;
-        ListNode *p = l;
-        while (p != nullptr)
+        while (carry)
         {
-            v.push_back(p->val);
-            p = p->next;
+            ListNode *q = new ListNode(carry % 10);
+            carry /= 10;
+            p->next = q;
+            p = q;
         }
-        for (int i = v.size() - 1; i >= 0; --i)
-        {
-            ans += v[i];
-            ans *= 10;
-        }
-        ans /= 10;
         return ans;
     }
 };

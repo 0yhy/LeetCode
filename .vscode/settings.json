@@ -4,6 +4,8 @@
     "*.wxss": "css",
     "*.wxs": "javascript",
     "limits": "cpp",
-    "string": "cpp"
+    "string": "cpp",
+    "iostream": "cpp",
+    "ostream": "cpp"
   }
 }

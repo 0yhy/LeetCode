@@ -3,9 +3,8 @@
     "*.cjson": "jsonc",
     "*.wxss": "css",
     "*.wxs": "javascript",
-    "limits": "cpp",
-    "string": "cpp",
-    "iostream": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "vector": "cpp",
+    "string": "cpp"
   }
 }

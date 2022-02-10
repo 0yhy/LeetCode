@@ -16,7 +16,29 @@
 class Solution
 {
 public:
-    ListNode *mergeKLists(vector<ListNode *> &lists)
+    // 分治法，类归并排序
+    ListNode *mergeKLists(vector<ListNode *> &Lists)
+    {
+        int arrSize = Lists.size();
+        if (!arrSize)
+            return nullptr;
+        // cnt为每次待合并的两个链表在Lists中的下标值的差
+        int cnt = 1;
+        // totalCnt为剩余未合并的链表数
+        int totalCnt = arrSize;
+        while (cnt < arrSize)
+        {
+            // 如果待合并链表数为奇数，i + cnt小于 arrSize - 1
+            // 如果待合并链表数为偶数，i + cnt小于 arrSize 即可
+            for (int i = 0; i + cnt < (totalCnt % 2 ? arrSize - 1 : arrSize); i += cnt * 2)
+                Lists[i] = mergeTwoLists(Lists[i], Lists[i + cnt]);
+            cnt *= 2;
+            totalCnt = totalCnt / 2 + totalCnt % 2;
+        }
+        return Lists[0];
+    }
+    // 暴力解法，两两合并，最后一个点超时
+    ListNode *mergeKListsBruteForce(vector<ListNode *> &lists)
     {
         if (!lists.size())
             return nullptr;
